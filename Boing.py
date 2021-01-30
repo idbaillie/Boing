@@ -21,20 +21,33 @@ FPS = 30
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface((50,50))
-        self.image.fill(BLACK)
+        self.image = pygame.image.load("Player1.png").convert()
+        self.image.set_colorkey(BLACK)
+        # self.image = pygame.Surface((50,50))
+        # self.image.fill(BLACK)
         self.rect = self.image.get_rect()
         self.rect.center = (WIDTH /2, HEIGHT /2)
+        self.y_move = 5
+        
+        
+        
+        
         
     def update(self):
-        self.rect.x +=5 
-        self.rect.y +=5
+        self.rect.x += 5 
+        self.rect.y += self.y_move
         
         if self.rect.left > WIDTH:
             self.rect.right = 0
             
-        if self.rect.bottom > HEIGHT:
-            self.rect.bottom = 0
+        if self.rect.bottom > HEIGHT -200:
+            self.y_move = -5
+        
+        if self.rect.top < 200:
+            self.y_move = 5
+            
+        if self.rect.left > WIDTH:
+            self.rect.right = 0
 
 
 
